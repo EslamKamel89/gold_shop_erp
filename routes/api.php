@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProducerController;
@@ -14,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 Route::get( '/user', function (Request $request) {
 	return $request->user();
 } )->middleware( 'auth:sanctum' );
+
+
+Route::prefix( '/auth' )->group( function () {
+	Route::post( '/login', [ AuthController::class, 'login' ] )
+		->name( 'login' );
+	Route::get( '/register', [ AuthController::class, 'register' ] )
+		->name( 'register' )
+		->middleware( [ 'auth:sanctum' ] );
+	Route::get( '/forget-password', [ AuthController::class, 'forgetPassword' ] )
+		->name( 'forgetPassword' );
+} );
 
 Route::middleware( [ 'auth:sanctum' ] )->group( function () {
 	Route::apiResource( '/shops', ShopController::class);
