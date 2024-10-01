@@ -4,8 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Producer extends Model
-{
-    use HasFactory;
+class Producer extends Model {
+	use HasFactory;
+	protected $fillable = [ 
+		'name',
+	];
+
+
+	//! Relationships
+	public function products(): HasMany {
+		return $this->hasMany( Product::class);
+	}
 }
