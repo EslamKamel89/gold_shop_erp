@@ -19,12 +19,11 @@ Route::get( '/user', function (Request $request) {
 
 Route::prefix( '/auth' )->group( function () {
 	Route::post( '/login', [ AuthController::class, 'login' ] )
-		->name( 'login' );
-	Route::get( '/register', [ AuthController::class, 'register' ] )
-		->name( 'register' )
-		->middleware( [ 'auth:sanctum' ] );
+		->name( 'apiLogin' );
+	Route::post( '/register', [ AuthController::class, 'register' ] )
+		->name( 'apiRegister' );
 	Route::get( '/forget-password', [ AuthController::class, 'forgetPassword' ] )
-		->name( 'forgetPassword' );
+		->name( 'apiForgetPassword' )->middleware( [ 'auth:sanctum' ] );
 } );
 
 Route::middleware( [ 'auth:sanctum' ] )->group( function () {

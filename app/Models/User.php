@@ -23,7 +23,7 @@ class User extends Authenticatable {
 	 *
 	 * @var array<int, string>
 	 */
-	protected $fillable = [ 
+	protected $fillable = [
 		'name',
 		'email',
 		'password',
@@ -35,7 +35,7 @@ class User extends Authenticatable {
 	 *
 	 * @var array<int, string>
 	 */
-	protected $hidden = [ 
+	protected $hidden = [
 		'password',
 		'remember_token',
 		'two_factor_recovery_codes',
@@ -47,7 +47,7 @@ class User extends Authenticatable {
 	 *
 	 * @var array<int, string>
 	 */
-	protected $appends = [ 
+	protected $appends = [
 		'profile_photo_url',
 	];
 
@@ -57,7 +57,7 @@ class User extends Authenticatable {
 	 * @return array<string, string>
 	 */
 	protected function casts(): array {
-		return [ 
+		return [
 			'email_verified_at' => 'datetime',
 			'password' => 'hashed',
 		];
@@ -70,5 +70,10 @@ class User extends Authenticatable {
 
 	public function updateInvoices(): HasMany {
 		return $this->hasMany( User::class, 'update_user_id' );
+	}
+
+	//! Helpers
+	public function isAdmin(): bool {
+		return str( $this->role )->lower() == 'admin';
 	}
 }
