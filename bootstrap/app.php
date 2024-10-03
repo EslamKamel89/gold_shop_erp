@@ -29,12 +29,15 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 			foreach ( $e->errors() as $key => $value ) {
 				$errors[] = $value[0];
 			}
-			return App::make( CustomJsonResponse::class)->failure( 'Validation Failure', $errors, 422 );
+			// return App::make( CustomJsonResponse::class)->failure( 'Validation Failure', $errors, 422 );
+			return App::make( CustomJsonResponse::class)->failure( 'فشل التحقق', $errors, 422 );
 		} );
 		$exceptions->render( function (AuthenticationException $e) {
-			return App::make( CustomJsonResponse::class)->failure( 'Unauthenticated User', statusCode: 401 );
+			// return App::make( CustomJsonResponse::class)->failure( 'Unauthenticated User', statusCode: 401 );
+			return App::make( CustomJsonResponse::class)->failure( 'مستخدم لم تتم مصادقته', statusCode: 401 );
 		} );
 		$exceptions->render( function (AccessDeniedHttpException $e) {
-			return App::make( CustomJsonResponse::class)->failure( 'This action is unauthorized.', statusCode: 403 );
+			// return App::make( CustomJsonResponse::class)->failure( 'This action is unauthorized.', statusCode: 403 );
+			return App::make( CustomJsonResponse::class)->failure( 'هذا الإجراء غير مصرح به', statusCode: 403 );
 		} );
 	} )->create();
