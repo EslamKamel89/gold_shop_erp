@@ -25,8 +25,11 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 			return App::make( CustomJsonResponse::class)->failure( 'Resource Not Found' );
 		} );
 		$exceptions->render( function (ValidationException $e) {
-			// dump( $e, get_class_methods( $e ) );
-			return App::make( CustomJsonResponse::class)->failure( 'Validation Failure', $e->errors(), 422 );
+			$errors = [];
+			foreach ( $e->errors() as $key => $value ) {
+				$errors[] = $value[0];
+			}
+			return App::make( CustomJsonResponse::class)->failure( 'Validation Failure', $errors, 422 );
 		} );
 		$exceptions->render( function (AuthenticationException $e) {
 			return App::make( CustomJsonResponse::class)->failure( 'Unauthenticated User', statusCode: 401 );
