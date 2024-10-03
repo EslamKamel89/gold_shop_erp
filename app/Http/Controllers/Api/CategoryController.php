@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Spatie\QueryBuilder\QueryBuilder;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategoryController extends Controller {
 	use ApiResponse;
@@ -30,10 +31,10 @@ class CategoryController extends Controller {
 	public function store( Request $request ) {
 		Gate::authorize( 'create', Category::class);
 		$validated = $request->validate( [ 
-			'name' => 'required|unique:shops,name|min:3|max:255'
+			'name' => 'required|unique:categories,name|min:3|max:255'
 		] );
-		$shop = Category::create( $validated );
-		return $this->success( new CategoryResource( $shop ) );
+		$category = Category::create( $validated );
+		return $this->success( new CategoryResource( $category ) );
 	}
 
 	/**
@@ -44,6 +45,9 @@ class CategoryController extends Controller {
 			->allowedIncludes( [ 'products' ] )
 			->where( 'id', $id )
 			->first();
+		if ( ! $category ) {
+			throw new NotFoundHttpException();
+		}
 		Gate::authorize( 'view', $category );
 		return $this->success( new CategoryResource( $category ) );
 	}
@@ -54,7 +58,7 @@ class CategoryController extends Controller {
 	public function update( Request $request, Category $category ) {
 		Gate::authorize( 'update', $category );
 		$validated = $request->validate( [ 
-			'name' => [ 'required', Rule::unique( 'shops', 'name' )->ignore( $category->id, 'id' ), 'min:3', 'max:255' ]
+			'name' => [ 'required', Rule::unique( 'categories', 'name' )->ignore( $category->id, 'id' ), 'min:3', 'max:255' ]
 		] );
 		$category->update( $validated );
 		return $this->success( new CategoryResource( $category ) );
