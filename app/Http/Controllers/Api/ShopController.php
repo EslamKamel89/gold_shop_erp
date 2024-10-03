@@ -18,7 +18,7 @@ class ShopController extends Controller {
 	public function index() {
 		Gate::authorize( 'viewAny', Shop::class);
 		return $this->success(
-			ShopResource::collection( Shop::paginate( 10 ) ),
+			ShopResource::collection( Shop::paginate( request()->get( 'limit' ) ?? 10 ) ),
 			pagination: true,
 		);
 	}
