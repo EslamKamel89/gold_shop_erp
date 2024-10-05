@@ -71,6 +71,6 @@ class ProducerController extends Controller {
 	public function destroy( Producer $producer ) {
 		Gate::authorize( 'delete', $producer );
 		$producer->delete();
-		return $this->success( [], message: 'producer deleted successfully' );
+		return $this->success( [], message: 'تم حذف الصانع بنجاح' );
 	}
 }

@@ -70,6 +70,6 @@ class CategoryController extends Controller {
 	public function destroy( Category $category ) {
 		Gate::authorize( 'delete', $category );
 		$category->delete();
-		return $this->success( [], message: 'category deleted successfully' );
+		return $this->success( [], message: 'تم حذف الصنف بنجاح' );
 	}
 }

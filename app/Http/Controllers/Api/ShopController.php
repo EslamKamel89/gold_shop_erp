@@ -29,7 +29,7 @@ class ShopController extends Controller {
 	public function store( Request $request ) {
 		//
 		Gate::authorize( 'create', Shop::class);
-		$validated = $request->validate( [
+		$validated = $request->validate( [ 
 			'name' => 'required|unique:shops,name|min:3|max:255'
 		] );
 		$shop = Shop::create( $validated );
@@ -51,7 +51,7 @@ class ShopController extends Controller {
 	public function update( Request $request, Shop $shop ) {
 		//
 		Gate::authorize( 'update', $shop );
-		$validated = $request->validate( [
+		$validated = $request->validate( [ 
 			'name' => [ 'required', Rule::unique( 'shops', 'name' )->ignore( $shop->id, 'id' ), 'min:3', 'max:255' ]
 		] );
 		$shop->update( $validated );
@@ -65,6 +65,6 @@ class ShopController extends Controller {
 		//
 		Gate::authorize( 'delete', $shop );
 		$shop->delete();
-		return $this->success( [], message: 'Shop deleted successfully' );
+		return $this->success( [], message: 'تم حذف المحل بنجاح' );
 	}
 }
