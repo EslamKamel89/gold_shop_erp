@@ -20,7 +20,15 @@ class Product extends Model {
 		'in_stock',
 		'quantity',
 		'tax',
+		'weight',
+		'manufacture_cost',
 	];
+
+	protected function casts(): array {
+		return [ 
+			'in_stock' => 'boolean',
+		];
+	}
 
 	//! Relationships
 	public function category(): BelongsTo {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
+use App\Models\GoldPrice;
 use App\Models\Product;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -19,12 +20,21 @@ class ProductController extends Controller {
 	 */
 	public function index() {
 		Gate::authorize( 'viewAny', Product::class);
-		$products = QueryBuilder::for( Product::class)
+		$productQuery = QueryBuilder::for( Product::class)
 			->allowedIncludes( [ 'category', 'producer', 'creditor' ] )
 			->defaultSort( '-created_at' )
 			->allowedSorts( 'name', 'price', 'created_at', 'quantity', 'tax' )
-			->allowedFilters( [ 'category_id', 'producer_id', 'creditor_id', 'name', 'in_stock' ] )
-			->paginate( request()->get( 'limit' ) ?? 10 );
+			->allowedFilters( [ 'name', 'in_stock' ] );
+		if ( request( 'categoryId' ) ) {
+			$productQuery->where( 'category_id', request( 'categoryId' ) );
+		}
+		if ( request( 'producerId' ) ) {
+			$productQuery->where( 'producer_id', request( 'producerId' ) );
+		}
+		if ( request( 'creditorId' ) ) {
+			$productQuery->where( 'creditor_id', request( 'creditorId' ) );
+		}
+		$products = $productQuery->paginate( request()->get( 'limit' ) ?? 10 );
 
 		return $this->success(
 			ProductResource::collection( $products ),
@@ -64,7 +74,11 @@ class ProductController extends Controller {
 			throw new NotFoundHttpException();
 		}
 		Gate::authorize( 'view', $product );
-		return $this->success( new ProductResource( $product ) );//
+		$goldPrice = GoldPrice::where( 'standard', $product->standard )->first();
+		return $this->success(
+			new ProductResource( $product ),
+			additionalData: [ 'gramePrice' => $goldPrice->price ]
+		);
 	}
 
 	/**

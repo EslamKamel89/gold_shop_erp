@@ -1,0 +1,9 @@
+tax ,, gramPrice >> global
+
+product relation shop <done>
+
+instock in product model cast it to true or false <done>
+add weight and manufacture cost to the products table <done>
+product model show gram price based on standard  <done>
+add to item table sold or not <done>
+allowed filters category_id uses like operator <done>

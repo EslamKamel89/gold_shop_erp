@@ -11,7 +11,16 @@ class Item extends Model {
 	protected $fillable = [ 
 		'product_id',
 		'code',
+		'sold'
 	];
+
+	//! casts
+	protected function casts(): array {
+		return [ 
+			'sold' => 'boolean',
+		];
+	}
+
 
 	//! Relationships
 	public function product(): BelongsTo {

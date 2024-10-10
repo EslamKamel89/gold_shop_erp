@@ -20,6 +20,8 @@ class ProductResource extends JsonResource {
 			'inStock' => $this->in_stock,
 			'quantity' => $this->quantity,
 			'tax' => $this->tax,
+			'weight' => $this->weight,
+			'manufactureCost' => $this->manufacture_cost,
 			'category' => new CategoryResource( $this->whenLoaded( 'category' ) ),
 			'producer' => new ProducerResource( $this->whenLoaded( 'producer' ) ),
 			'creditor' => new CreditorResource( $this->whenLoaded( 'creditor' ) ),
