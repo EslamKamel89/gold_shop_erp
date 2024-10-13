@@ -19,4 +19,7 @@ class Shop extends Model {
 	public function updateInvoices(): HasMany {
 		return $this->hasMany( User::class, 'update_shop_id' );
 	}
+	public function items(): HasMany {
+		return $this->hasMany( Item::class);
+	}
 }

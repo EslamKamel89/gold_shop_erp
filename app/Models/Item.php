@@ -10,6 +10,8 @@ class Item extends Model {
 	use HasFactory;
 	protected $fillable = [ 
 		'product_id',
+		'creditor_id',
+		'shop_id',
 		'code',
 		'sold'
 	];
@@ -25,6 +27,12 @@ class Item extends Model {
 	//! Relationships
 	public function product(): BelongsTo {
 		return $this->belongsTo( Product::class);
+	}
+	public function creditor(): BelongsTo {
+		return $this->belongsTo( Creditor::class);
+	}
+	public function shop(): BelongsTo {
+		return $this->belongsTo( Shop::class);
 	}
 
 }

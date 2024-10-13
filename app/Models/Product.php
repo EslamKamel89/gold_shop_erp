@@ -13,7 +13,6 @@ class Product extends Model {
 	protected $fillable = [ 
 		'category_id',
 		'producer_id',
-		'creditor_id',
 		'name',
 		'price',
 		'standard',
@@ -36,9 +35,6 @@ class Product extends Model {
 	}
 	public function producer(): BelongsTo {
 		return $this->belongsTo( Producer::class);
-	}
-	public function creditor(): BelongsTo {
-		return $this->belongsTo( Creditor::class);
 	}
 	public function items(): HasMany {
 		return $this->hasMany( Item::class);

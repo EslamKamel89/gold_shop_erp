@@ -21,7 +21,7 @@ class ProductController extends Controller {
 	public function index() {
 		Gate::authorize( 'viewAny', Product::class);
 		$productQuery = QueryBuilder::for( Product::class)
-			->allowedIncludes( [ 'category', 'producer', 'creditor' ] )
+			->allowedIncludes( [ 'category', 'producer' ] )
 			->defaultSort( '-created_at' )
 			->allowedSorts( 'name', 'price', 'created_at', 'quantity', 'tax' )
 			->allowedFilters( [ 'name', 'in_stock' ] );
@@ -31,9 +31,7 @@ class ProductController extends Controller {
 		if ( request( 'producerId' ) ) {
 			$productQuery->where( 'producer_id', request( 'producerId' ) );
 		}
-		if ( request( 'creditorId' ) ) {
-			$productQuery->where( 'creditor_id', request( 'creditorId' ) );
-		}
+
 		$products = $productQuery->paginate( request()->get( 'limit' ) ?? 10 );
 
 		return $this->success(
@@ -50,7 +48,6 @@ class ProductController extends Controller {
 		$validated = $request->validate( [ 
 			'category_id' => 'required|exists:categories,id',
 			'producer_id' => 'required|exists:producers,id',
-			'creditor_id' => 'required|exists:creditors,id',
 			'name' => 'required|unique:products,name|min:3|max:255',
 			'price' => 'required|numeric',
 			'standard' => 'required|max:255',
@@ -67,7 +64,7 @@ class ProductController extends Controller {
 	 */
 	public function show( int $id ) {
 		$product = QueryBuilder::for( Product::class)
-			->allowedIncludes( [ 'category', 'producer', 'creditor' ] )
+			->allowedIncludes( [ 'category', 'producer' ] )
 			->where( 'id', $id )
 			->first();
 		if ( ! $product ) {
@@ -85,11 +82,10 @@ class ProductController extends Controller {
 	 * Update the specified resource in storage.
 	 */
 	public function update( Request $request, Product $product ) {
-		Gate::authorize( 'update', Product::class);
+		Gate::authorize( 'update', $product );
 		$validated = $request->validate( [ 
 			'category_id' => 'sometimes|exists:categories,id',
 			'producer_id' => 'sometimes|exists:producers,id',
-			'creditor_id' => 'sometimes|exists:creditors,id',
 			'name' => [ 
 				'sometimes',
 				Rule::unique( 'products', 'name' )->ignore( $product->id ),
@@ -102,7 +98,7 @@ class ProductController extends Controller {
 			'quantity' => 'sometimes|numeric',
 			'tax' => 'sometimes|numeric',
 		] );
-		$product = Product::create( $validated );
+		$product->update( $validated );
 		return $this->success( new ProductResource( $product ) );//
 	}
 

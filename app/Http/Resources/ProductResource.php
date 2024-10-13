@@ -24,7 +24,6 @@ class ProductResource extends JsonResource {
 			'manufactureCost' => $this->manufacture_cost,
 			'category' => new CategoryResource( $this->whenLoaded( 'category' ) ),
 			'producer' => new ProducerResource( $this->whenLoaded( 'producer' ) ),
-			'creditor' => new CreditorResource( $this->whenLoaded( 'creditor' ) ),
 			'createdAt' => $this->created_at,
 		];
 	}
