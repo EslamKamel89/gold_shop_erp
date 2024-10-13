@@ -34,4 +34,5 @@ Route::middleware( [ 'auth:sanctum' ] )->group( function () {
 	Route::apiResource( '/items', ItemController::class);
 	Route::apiResource( '/gold-prices', GoldPriceController::class);
 	Route::apiResource( '/invoices', InvoiceController::class);
+	Route::apiResource( '/creditors', CreditorController::class);
 } );

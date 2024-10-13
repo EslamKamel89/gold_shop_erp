@@ -19,19 +19,19 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run(): void {
 		for ( $i = 1; $i <= 8; $i++ ) {
-			// Item::create( [
-			// 	'product_id' => $i,
-			// 	'creditor_id' => $i,
-			// 	'shop_id' => $i,
-			// 	'code' => 'code ' . $i,
-			// 	'sold' => false,
-			// ] );
+			Item::create( [ 
+				'product_id' => $i,
+				'creditor_id' => $i,
+				'shop_id' => $i,
+				'code' => 'code ' . $i,
+				'sold' => false,
+			] );
 
-			// GoldPrice::create( [
-			// 	'standard' => 'standard ' . $i,
-			// 	'description' => 'description ' . $i,
-			// 	'price' => $i * 200,
-			// ] );
+			GoldPrice::create( [ 
+				'standard' => 'standard ' . $i,
+				'description' => 'description ' . $i,
+				'price' => $i * 200,
+			] );
 
 
 			// $shop = Shop::create( [ 'name' => 'Shop gold ' . $i ] );
