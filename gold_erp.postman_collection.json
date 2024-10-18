@@ -615,7 +615,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"category one updated\"\r\n}",
+							"raw": "{\r\n    \"name\" : \"product gold 2 updated\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -642,7 +642,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\" : 2 , \r\n    \"producer_id\" : 3 , \r\n    \"creditor_id\" : 1 , \r\n    \"name\" : \"product two\"   , \r\n    \"price\": 1000 , \r\n    \"standard\" : \"24_gold\"   , \r\n    \"in_stock\" : true , \r\n    \"quantity\" : 50  , \r\n    \"tax\" : 7\r\n\r\n}",
+							"raw": "{\r\n    \"category_id\" : 2 , \r\n    \"producer_id\" : 3 , \r\n    \"name\" : \"product two\"   , \r\n    \"price\": 1000 , \r\n    \"standard\" : \"24_gold\"   , \r\n    \"in_stock\" : true , \r\n    \"quantity\" : 50  , \r\n    \"tax\" : 7\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -689,6 +689,534 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "viewAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items?limit=5&page=1&include=product,creditor,shop&sort=-created_at&filter[sold]=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "include",
+									"value": "product,creditor,shop"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "filter[sold]",
+									"value": "false"
+								},
+								{
+									"key": "creditorId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "productId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "shopId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/2?include=product,creditor,shop",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								"2"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "product,creditor,shop"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sold\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\" : 2 , \r\n    \"creditor_id\" : 3 , \r\n    \"shop_id\" : 1 , \r\n    \"code\" : \"ABC12345\"   , \r\n    \"sold\": false \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/items/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Creditor",
+			"item": [
+				{
+					"name": "viewAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/creditors?limit=5&page=1&include=items&sort=-money_balance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"creditors"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "include",
+									"value": "items"
+								},
+								{
+									"key": "sort",
+									"value": "-money_balance"
+								},
+								{
+									"key": "filter[name]",
+									"value": "Creditor gold 10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/creditors/2?include=items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"creditors",
+								"2"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "items"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Selia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/creditors/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"creditors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Eslam Kamel\" , \r\n    \"phone\" : \"01024510803\" , \r\n    \"address\" : \"mansoura\" , \r\n    \"money_balance\" : 300 , \r\n    \"gold_balance\" : 257\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/creditors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"creditors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/creditors/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"creditors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GoldPrice",
+			"item": [
+				{
+					"name": "viewAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/gold-prices?limit=5&page=1&sort=-price&filter[standard]=standard 1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gold-prices"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "-price"
+								},
+								{
+									"key": "filter[standard]",
+									"value": "standard 1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/gold-prices/2?include=product,creditor,shop",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gold-prices",
+								"2"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "product,creditor,shop"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\" : 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/gold-prices/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gold-prices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"standard\" : \"24 carat gold\" , \r\n    \"description\" : \"hello world\" , \r\n    \"price\" : 1000 \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/gold-prices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gold-prices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/gold-prices/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gold-prices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -699,7 +1227,7 @@
 				"packages": {},
 				"exec": [
 					"pm.request.headers.add({key: 'Accept', value: 'application/json' })\r",
-					"pm.request.headers.add({key: 'Authorization', value: 'Bearer GAYgk92yb4sbSVRtfAvkxHf5SOxqxBiloPT5A9r79d21c99d' })"
+					"pm.request.headers.add({key: 'Authorization', value: 'Bearer o5qgZeTh0YFnug7CcM5UmCThSWICfsDlKnsFSDEN6d9487a0' })"
 				]
 			}
 		},

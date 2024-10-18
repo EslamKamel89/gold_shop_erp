@@ -27,7 +27,8 @@ class Invoice extends Model {
 			table: 'orders',
 			foreignPivotKey: 'invoice_id',
 			relatedPivotKey: 'product_id',
-		)->withPivot( 'quantity', 'description' )
+		)->withPivot( 'quantity', 'description', 'unit_price' )
+			->as( 'orders' )
 			->withTimestamps();
 	}
 	public function invoiceCreator(): BelongsTo {

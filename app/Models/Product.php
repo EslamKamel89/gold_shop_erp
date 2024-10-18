@@ -45,7 +45,8 @@ class Product extends Model {
 			table: 'orders',
 			foreignPivotKey: 'product_id',
 			relatedPivotKey: 'invoice_id',
-		)->withPivot( 'quantity', 'description' )
+		)->withPivot( 'quantity', 'description', 'unit_price' )
+			->as( 'orders' )
 			->withTimestamps();
 	}
 }
