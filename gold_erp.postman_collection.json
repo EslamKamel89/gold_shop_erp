@@ -711,7 +711,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/items?limit=5&page=1&include=product,creditor,shop&sort=-created_at&filter[sold]=false",
+							"raw": "{{baseUrl}}/items?limit=5&page=1&include=product,creditor,shop&sort=-created_at&productId=1&shopId=1",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -737,7 +737,8 @@
 								},
 								{
 									"key": "filter[sold]",
-									"value": "false"
+									"value": "false",
+									"disabled": true
 								},
 								{
 									"key": "creditorId",
@@ -746,13 +747,11 @@
 								},
 								{
 									"key": "productId",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "shopId",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								}
 							]
 						}
@@ -1217,6 +1216,94 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "createInvoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\" : 1 , \r\n    \"shop_id\" : 1  , \r\n    \"customer_name\" : \"Eslam Ahmed Kamel\" , \r\n    \"customer_phone\" : \"01020504470\" , \r\n    // this code is for the whole invoice. if you don' need it i will remove it\r\n    \"code\" : \"abcd\"  , \r\n    \"orders\" : [\r\n        {\r\n            \"product_id\" : 1  , \r\n            \"codes\" : [\"code 1\"  ]  , \r\n            \"quantity\" : 2  \r\n        } , \r\n        {\r\n            \"product_id\" : 2 ,\r\n            \"quantity\" : 3 , \r\n            \"codes\" : [\"code 2\" ]  \r\n        }\r\n    ]  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/invoices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/invoices?page=1&limit=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"invoices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/invoices/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"invoices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -1227,7 +1314,7 @@
 				"packages": {},
 				"exec": [
 					"pm.request.headers.add({key: 'Accept', value: 'application/json' })\r",
-					"pm.request.headers.add({key: 'Authorization', value: 'Bearer o5qgZeTh0YFnug7CcM5UmCThSWICfsDlKnsFSDEN6d9487a0' })"
+					"pm.request.headers.add({key: 'Authorization', value: 'Bearer OAwe523TanLUnVlX6wzCulMBg99z1feJaEwWEbOV7f0c81c5' })"
 				]
 			}
 		},

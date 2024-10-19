@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceResource extends JsonResource {
 	/**
@@ -24,10 +26,15 @@ class InvoiceResource extends JsonResource {
 			'updateShopId' => $this->update_shop_id,
 			'createdAt' => $this->created_at,
 			'updatedAt' => $this->updated_at,
-			'invoiceCreator' => new UserResource( $this->whenLoaded( 'invoiceCreator' ) ),
-			'invoiceUpdater' => new UserResource( $this->whenLoaded( 'invoiceUpdater' ) ),
-			'createdInShop' => new ShopResource( $this->whenLoaded( 'createdInShop' ) ),
-			'updatedInShop' => new ShopResource( $this->whenLoaded( 'updatedInShop' ) ),
+			'products' => ProductResource::collection( $this->products ),
+			'orders' => OrderResource::collection(
+				Order::where( 'invoice_id', $this->id )->get()
+			),
+			'invoiceCreator' => new UserResource( $this->invoiceCreator ),
+			'invoiceUpdater' => new UserResource( $this->invoiceUpdater ),
+			'createdInShop' => new ShopResource( $this->createdInShop ),
+			'updatedInShop' => new ShopResource( $this->updatedInShop ),
+
 		];
 	}
 }

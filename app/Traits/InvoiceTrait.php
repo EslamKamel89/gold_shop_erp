@@ -12,7 +12,7 @@ trait InvoiceTrait {
 			[ 
 				'user_id' => [ 'required', 'exists:users,id' ],
 				'shop_id' => [ 'required', 'exists:shops,id' ],
-				'code' => [ 'required', 'unique:invoices,code', 'max:255' ],
+				'code' => [ 'sometimes', 'unique:invoices,code', 'max:255' ],
 				// 'total_price' => [ 'required', 'numeric' ],
 				'customer_name' => [ 'required', 'max:255' ],
 				'customer_phone' => [ 'required', 'max:255' ],
@@ -21,6 +21,7 @@ trait InvoiceTrait {
 		if ( $invoiceValidator->fails() ) {
 			throw new ValidationException( $invoiceValidator );
 		}
+		return $invoiceValidator->validated();
 	}
 
 	public function validateOrdersKeyExist() {
@@ -66,6 +67,7 @@ trait InvoiceTrait {
 					'product_id' => [ 'required', 'exists:products,id' ],
 					'quantity' => [ 'required', 'numeric' ],
 					'description' => [ 'sometimes', 'max:255' ],
+					'price' => [ 'required', 'numeric' ],
 					'codes' => [ 'required' ],
 				]
 			);
