@@ -67,7 +67,7 @@ trait InvoiceTrait {
 					'product_id' => [ 'required', 'exists:products,id' ],
 					'quantity' => [ 'required', 'numeric' ],
 					'description' => [ 'sometimes', 'max:255' ],
-					'price' => [ 'required', 'numeric' ],
+					'unit_price' => [ 'required', 'numeric' ],
 					'codes' => [ 'required' ],
 				]
 			);

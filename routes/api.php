@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\ItemCountHelper;
+use App\Helpers\LogHelper;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\CategoryController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\GoldPriceController;
 use App\Http\Controllers\Api\CreditorController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +38,12 @@ Route::middleware( [ 'auth:sanctum' ] )->group( function () {
 	Route::apiResource( '/gold-prices', GoldPriceController::class);
 	Route::apiResource( '/invoices', InvoiceController::class);
 	Route::apiResource( '/creditors', CreditorController::class);
+} );
+
+Route::get( 'test', function () {
+	$item = Item::find( 2 );
+	LogHelper::_( $item->product );
+	ItemCountHelper::decrementItemCount( $item );
+	LogHelper::_( $item->product );
+
 } );

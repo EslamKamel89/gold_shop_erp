@@ -17,9 +17,9 @@ return new class extends Migration {
 			$table->string( 'name' );
 			$table->float( 'price' );
 			$table->string( 'standard' );
-			$table->boolean( 'in_stock' );
-			$table->integer( 'quantity' );
-			$table->float( 'tax' );
+			$table->boolean( 'in_stock' )->default( false );
+			$table->integer( 'quantity' )->default( 0 );
+			$table->float( 'tax' )->nullable();
 			$table->timestamps();
 		} );
 	}

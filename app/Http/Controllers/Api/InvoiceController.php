@@ -50,8 +50,8 @@ class InvoiceController extends Controller {
 			$validatedOrders = $this->invoiceHelper->addPriceToEachOrder( $validatedOrders );
 			//? calcuate invoice total price and merge it with the invoiceValidated array
 			$inoviceValidated['total_price'] = $this->invoiceHelper->getTotalInvoicePrice( $validatedOrders );
-			info( 'inoviceValidated', [ $inoviceValidated ] );
-			info( 'validatedOrders', [ $validatedOrders ] );
+			// info( 'inoviceValidated', [ $inoviceValidated ] );
+			// info( 'validatedOrders', [ $validatedOrders ] );
 			return $this->success( [ 
 				'invoiceValidated' => $inoviceValidated,
 				'validatedOrders' => $validatedOrders,

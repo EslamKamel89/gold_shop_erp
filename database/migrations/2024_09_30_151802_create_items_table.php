@@ -12,7 +12,7 @@ return new class extends Migration {
 		Schema::create( 'items', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId( 'product_id' )->nullable()->constrained()->nullOnDelete();
-			$table->string( 'code' );
+			$table->string( 'code' )->unique();
 			$table->timestamps();
 		} );
 	}

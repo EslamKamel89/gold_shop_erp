@@ -24,36 +24,31 @@ const invoiceRequest = {
     },
   ],
 };
-const testOne = {
-  "inoviceValidated": [
-    {
-      "user_id": 1,
-      "shop_id": 1,
-      "code": "abc",
-      "customer_name": "Eslam Ahmed Kamel",
-      "customer_phone": "01020504470",
-      "total_price": 800.0,
-    },
-  ]
-};
 
-const testTwo = {
-  "validatedOrders": [
-    [
-      {
-        "product_id": 1,
-        "quantity": 2,
-        "codes": ["code 1"],
-        "total_price": 200.0,
-        "unit_price": 100.0
-      },
-      {
-        "product_id": 2,
-        "quantity": 3,
-        "codes": ["ABC12345"],
-        "total_price": 600.0,
-        "unit_price": 200.0
-      },
-    ],
-  ]
-};
+test() {
+  var a = {
+    "id": 2,
+    "product_id": 2,
+    "code": "code 2",
+    "created_at": "2024-10-13T16:05:11.000000Z",
+    "updated_at": "2024-10-13T16:05:11.000000Z",
+    "shop_id": 2,
+    "sold": false,
+    "creditor_id": 2
+  };
+  var b = {
+    "id": 2,
+    "category_id": 2,
+    "producer_id": 2,
+    "name": "product gold 2 updated",
+    "price": 200,
+    "standard": "24_gold",
+    "in_stock": true,
+    "quantity": 82,
+    "tax": 3.5,
+    "created_at": "2024-10-05T20:06:43.000000Z",
+    "updated_at": "2024-10-13T14:57:57.000000Z",
+    "weight": null,
+    "manufacture_cost": null
+  };
+}
