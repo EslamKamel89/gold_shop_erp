@@ -13,7 +13,7 @@ class ItemCountHelper {
 			'quantity' => ++$quantity,
 		] );
 	}
-	public static function decrementItemCount( Item $item ) {
+	public static function decrementItemCount( Item $item, int $invoiceId ) {
 		if ( $item->sold ) {
 			throw new \Exception( "You are trying to decrement Product count with an item that is already sold" );
 		}
@@ -21,6 +21,7 @@ class ItemCountHelper {
 		$quantity = $product->quantity;
 		$item->update( [ 
 			'sold' => true,
+			'invoice_id' => $invoiceId,
 		] );
 		$product->update( [ 
 			'quantity' => --$quantity,

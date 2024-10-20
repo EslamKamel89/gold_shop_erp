@@ -36,19 +36,20 @@ test() {
     "sold": false,
     "creditor_id": 2
   };
-  var b = {
-    "id": 2,
-    "category_id": 2,
-    "producer_id": 2,
-    "name": "product gold 2 updated",
-    "price": 200,
-    "standard": "24_gold",
-    "in_stock": true,
-    "quantity": 82,
-    "tax": 3.5,
-    "created_at": "2024-10-05T20:06:43.000000Z",
-    "updated_at": "2024-10-13T14:57:57.000000Z",
-    "weight": null,
-    "manufacture_cost": null
-  };
+  var b = [
+    {
+      "product_id": 1,
+      "unit_price": 2000,
+      "codes": ["code-product-1-item-2", "code-product-1-item-3", "code-product-1-item-4"],
+      "quantity": 3,
+      "total_price": 6000
+    },
+    {
+      "product_id": 2,
+      "unit_price": 100000,
+      "codes": ["code-product-2-item-2"],
+      "quantity": 1,
+      "total_price": 100000
+    }
+  ];
 }

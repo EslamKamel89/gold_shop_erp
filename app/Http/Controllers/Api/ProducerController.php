@@ -20,8 +20,11 @@ class ProducerController extends Controller {
 	 */
 	public function index() {
 		Gate::authorize( 'viewAny', Producer::class);
+		$producers = QueryBuilder::for( Producer::class)
+			->allowedFilters( [ 'name' ] )
+			->paginate( request()->get( 'limit' ) ?? 10 );
 		return $this->success(
-			ProducerResource::collection( Producer::paginate( request()->get( 'limit' ) ?? 10 ) ),
+			ProducerResource::collection( $producers ),
 			pagination: true,
 		);
 	}

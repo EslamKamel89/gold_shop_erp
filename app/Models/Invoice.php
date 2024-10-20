@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Invoice extends Model {
 	use HasFactory;
@@ -44,5 +45,8 @@ class Invoice extends Model {
 
 	public function updatedInShop(): BelongsTo {
 		return $this->belongsTo( Shop::class, 'update_shop_id' );
+	}
+	public function items(): HasMany {
+		return $this->hasMany( Item::class, );
 	}
 }

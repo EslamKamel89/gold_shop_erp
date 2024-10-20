@@ -65,7 +65,7 @@ trait InvoiceTrait {
 				$order,
 				[ 
 					'product_id' => [ 'required', 'exists:products,id' ],
-					'quantity' => [ 'required', 'numeric' ],
+					// 'quantity' => [ 'required', 'numeric' ],
 					'description' => [ 'sometimes', 'max:255' ],
 					'unit_price' => [ 'required', 'numeric' ],
 					'codes' => [ 'required' ],

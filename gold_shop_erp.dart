@@ -10,3 +10,6 @@
 //! recieve the price from the invoice
 //! when you creaate new order the quantity should be zero and the user can't put the quantity with any value
 //! in_stock in the products should be calcuated based on the items and it defaults to false
+//? make suere that filter with name functionality is added to both Producer and categories
+//? the weight and the production cost when trying to create new product won't be saved in the database
+//? add foreign key constrains on the product with the gold price table

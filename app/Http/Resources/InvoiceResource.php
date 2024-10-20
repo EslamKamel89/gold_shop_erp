@@ -30,6 +30,7 @@ class InvoiceResource extends JsonResource {
 			'orders' => OrderResource::collection(
 				Order::where( 'invoice_id', $this->id )->get()
 			),
+			'items' => ItemResource::collection( $this->items ),
 			'invoiceCreator' => new UserResource( $this->invoiceCreator ),
 			'invoiceUpdater' => new UserResource( $this->invoiceUpdater ),
 			'createdInShop' => new ShopResource( $this->createdInShop ),

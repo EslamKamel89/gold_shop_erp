@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\ItemCountHelper;
 use App\Models\Category;
 use App\Models\Creditor;
 use App\Models\GoldPrice;
@@ -63,12 +64,14 @@ class DatabaseSeeder extends Seeder {
 				'name' => 'Product  ' . fake()->words( 3, true ),
 				"price" => fake()->numberBetween( 1000, 10000 ),
 				'standard' => fake()->randomElement( [ " 24 Karat Gold", "18 Karat Gold", "14 Karat Gold", "10 Karat Gold" ] ),
+				'weight' => fake()->numberBetween( 10, 100 ),
+				'manufacture_cost' => fake()->numberBetween( 100, 500 )
 				// 'in_Stock' => ,
 				// 'quantity' => 80 + $i,
 				// 'tax' => 7 / $i,
 			] );
 			for ( $k = 1; $k <= 10; $k++ ) {
-				Item::create( [ 
+				$item = Item::create( [ 
 					'product_id' => $i,
 					'creditor_id' => $i,
 					'shop_id' => fake()->randomElement( [ 1, 2 ] ),
@@ -76,6 +79,7 @@ class DatabaseSeeder extends Seeder {
 					'code' => "code-product-$i-item-$k",
 					'sold' => false,
 				] );
+				ItemCountHelper::incrementItemCount( $item );
 			}
 		}
 	}

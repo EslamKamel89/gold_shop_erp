@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 use App\Helpers\InvocieHelper;
+use App\Helpers\ItemCountHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
+use App\Models\Item;
 use App\Traits\ApiResponse;
 use App\Traits\InvoiceTrait;
 use Illuminate\Http\Request;
@@ -51,11 +53,13 @@ class InvoiceController extends Controller {
 			//? calcuate invoice total price and merge it with the invoiceValidated array
 			$inoviceValidated['total_price'] = $this->invoiceHelper->getTotalInvoicePrice( $validatedOrders );
 			// info( 'inoviceValidated', [ $inoviceValidated ] );
+
 			// info( 'validatedOrders', [ $validatedOrders ] );
-			return $this->success( [ 
-				'invoiceValidated' => $inoviceValidated,
-				'validatedOrders' => $validatedOrders,
-			] );
+			// return $this->success( [
+			// 	'invoiceValidated' => $inoviceValidated,
+			// 	'validatedOrders' => $validatedOrders,
+			// ] );
+			// return;
 			$invoice = Invoice::create( $inoviceValidated );
 			foreach ( $validatedOrders as $order ) {
 				$invoice->products()->attach(
@@ -65,6 +69,10 @@ class InvoiceController extends Controller {
 						"unit_price" => $order["unit_price"],
 					],
 				);
+				foreach ( $order['codes'] as $code ) {
+					$item = Item::where( 'code', $code )->first();
+					ItemCountHelper::decrementItemCount( $item, $invoice->id );
+				}
 			}
 
 			return $this->success( new InvoiceResource( $invoice ), message: "Order Placed Successfully" );

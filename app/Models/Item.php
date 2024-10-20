@@ -11,6 +11,7 @@ class Item extends Model {
 	protected $fillable = [ 
 		'product_id',
 		'creditor_id',
+		'invoice_id',
 		'shop_id',
 		'code',
 		'sold'
@@ -33,6 +34,9 @@ class Item extends Model {
 	}
 	public function shop(): BelongsTo {
 		return $this->belongsTo( Shop::class);
+	}
+	public function invoice(): BelongsTo {
+		return $this->belongsTo( Invoice::class);
 	}
 
 }

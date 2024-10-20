@@ -5,8 +5,12 @@ use App\Models\Product;
 class InvocieHelper {
 	public function addPriceToEachOrder( array $orders ): array {
 		foreach ( $orders as $k => $order ) {
-			$orders[ $k ]['total_price'] = $order['quantity'] * $order['unit_price'];
+			LogHelper::_( $order );
+			$orders[ $k ]['quantity'] = count( $order['codes'] );
+			$orders[ $k ]['total_price'] = count( $order['codes'] ) * $order['unit_price'];
 		}
+		LogHelper::_( $orders );
+
 		return $orders;
 	}
 

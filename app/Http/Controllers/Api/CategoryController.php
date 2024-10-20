@@ -19,8 +19,10 @@ class CategoryController extends Controller {
 	 */
 	public function index() {
 		Gate::authorize( 'viewAny', Category::class);
+		$categories = QueryBuilder::for( Category::class)
+			->allowedFilters( [ 'name' ] )->paginate( request()->get( 'limit' ) ?? 10 );
 		return $this->success(
-			CategoryResource::collection( Category::paginate( request()->get( 'limit' ) ?? 10 ) ),
+			CategoryResource::collection( $categories ),
 			pagination: true,
 		);
 	}

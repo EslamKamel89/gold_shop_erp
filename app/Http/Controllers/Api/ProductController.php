@@ -51,9 +51,11 @@ class ProductController extends Controller {
 			'name' => 'required|unique:products,name|min:3|max:255',
 			'price' => 'required|numeric',
 			'standard' => 'required|max:255',
-			'in_stock' => 'required|boolean',
+			// 'in_stock' => 'required|boolean',
 			'quantity' => 'required|numeric',
 			'tax' => 'required|numeric',
+			'weight' => [ 'required', 'numeric' ],
+			'manufacture_cost' => [ 'required', 'numeric' ],
 		] );
 		$product = Product::create( $validated );
 		return $this->success( new ProductResource( $product ) );//
@@ -94,9 +96,12 @@ class ProductController extends Controller {
 			],
 			'price' => 'sometimes|numeric',
 			'standard' => 'sometimes|max:255',
-			'in_stock' => 'sometimes|boolean',
+			// 'in_stock' => 'sometimes|boolean',
 			'quantity' => 'sometimes|numeric',
 			'tax' => 'sometimes|numeric',
+			'weight' => [ 'sometimes', 'numeric' ],
+			'manufacture_cost' => [ 'sometimes', 'numeric' ],
+
 		] );
 		$product->update( $validated );
 		return $this->success( new ProductResource( $product ) );//
