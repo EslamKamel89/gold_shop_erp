@@ -47,3 +47,4 @@ Route::get( 'test', function () {
 	LogHelper::_( $item->product );
 
 } );
+

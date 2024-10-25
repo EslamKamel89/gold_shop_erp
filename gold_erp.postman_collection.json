@@ -234,6 +234,11 @@
 								{
 									"key": "page",
 									"value": "1"
+								},
+								{
+									"key": "filter[name]",
+									"value": "similique",
+									"disabled": true
 								}
 							]
 						}
@@ -384,8 +389,8 @@
 									"value": "1"
 								},
 								{
-									"key": "include",
-									"value": "",
+									"key": "filter[name]",
+									"value": "dignissimos",
 									"disabled": true
 								}
 							]
@@ -532,7 +537,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/products?limit=5&page=1&include=category,producer,creditor&sort=-created_at&categoryId=1&producerId=1&creditorId=1",
+							"raw": "{{baseUrl}}/products?limit=5&page=1&include=category,producer&sort=created_at",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -550,11 +555,11 @@
 								},
 								{
 									"key": "include",
-									"value": "category,producer,creditor"
+									"value": "category,producer"
 								},
 								{
 									"key": "sort",
-									"value": "-created_at"
+									"value": "created_at"
 								},
 								{
 									"key": "filter[in_stock]",
@@ -563,15 +568,18 @@
 								},
 								{
 									"key": "categoryId",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "producerId",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "creditorId",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
@@ -615,7 +623,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"product gold 2 updated\"\r\n}",
+							"raw": "{\r\n    \"weight\" : 5 , \r\n    \"manufacture_cost\" : 60\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -623,13 +631,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/products/2",
+							"raw": "{{baseUrl}}/products/51",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"products",
-								"2"
+								"51"
 							]
 						}
 					},
@@ -642,7 +650,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\" : 2 , \r\n    \"producer_id\" : 3 , \r\n    \"name\" : \"product two\"   , \r\n    \"price\": 1000 , \r\n    \"standard\" : \"24_gold\"   , \r\n    \"in_stock\" : true , \r\n    \"quantity\" : 50  , \r\n    \"tax\" : 7\r\n\r\n}",
+							"raw": "{\r\n    \"category_id\" : 2 , \r\n    \"producer_id\" : 3 , \r\n    \"name\" : \"test product\"   , \r\n    \"price\": 1000 , \r\n    \"standard\" : \"24_gold\"   , \r\n    \"in_stock\" : true , \r\n    \"quantity\" : 50  , \r\n    \"tax\" : 7 , \r\n    \"weight\" : 200 , \r\n    \"manufacture_cost\" : 200.5\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -711,7 +719,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/items?limit=5&page=1&include=product,creditor,shop&sort=-created_at&productId=1&shopId=1",
+							"raw": "{{baseUrl}}/items?limit=5&page=1&include=product,creditor,shop&sort=-created_at&productId=2",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -747,11 +755,12 @@
 								},
 								{
 									"key": "productId",
-									"value": "1"
+									"value": "2"
 								},
 								{
 									"key": "shopId",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
@@ -897,7 +906,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/creditors?limit=5&page=1&include=items&sort=-money_balance",
+							"raw": "{{baseUrl}}/creditors?limit=5&page=1&include=items&sort=-money_balance&filter[name]=م",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -923,8 +932,7 @@
 								},
 								{
 									"key": "filter[name]",
-									"value": "Creditor gold 10",
-									"disabled": true
+									"value": "م"
 								}
 							]
 						}
@@ -1227,7 +1235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\" : 1 , \r\n    \"shop_id\" : 1  , \r\n    \"customer_name\" : \"Eslam Ahmed Kamel\" , \r\n    \"customer_phone\" : \"01020504470\" , \r\n    // this code is for the whole invoice. if you don' need it i will remove it\r\n    \"code\" : \"abcd\"  , \r\n    \"orders\" : [\r\n        {\r\n            \"product_id\" : 1  , \r\n            \"codes\" : [\"code 1\"  ]  , \r\n            \"quantity\" : 2  \r\n        } , \r\n        {\r\n            \"product_id\" : 2 ,\r\n            \"quantity\" : 3 , \r\n            \"codes\" : [\"code 2\" ]  \r\n        }\r\n    ]  \r\n}",
+							"raw": "{\r\n    \"user_id\" : 1 , \r\n    \"shop_id\" : 1  , \r\n    \"customer_name\" : \"Eslam Ahmed Kamel\" , \r\n    \"customer_phone\" : \"01020504470\" , \r\n    \"orders\" : [\r\n        {\r\n            \"product_id\" : 1  , \r\n            \"codes\" : [\"code-product-1-item-2\" , \"code-product-1-item-3\" , \"code-product-1-item-4\" ]  , \r\n            \"unit_price\" : 2000 \r\n        }  , \r\n        {\r\n            \"product_id\" : 2 ,\r\n            \"unit_price\" : 100000 , \r\n            \"codes\" : [\"code-product-2-item-2\" ]  \r\n        }\r\n    ]  \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1304,6 +1312,23 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/test",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -1314,7 +1339,7 @@
 				"packages": {},
 				"exec": [
 					"pm.request.headers.add({key: 'Accept', value: 'application/json' })\r",
-					"pm.request.headers.add({key: 'Authorization', value: 'Bearer OAwe523TanLUnVlX6wzCulMBg99z1feJaEwWEbOV7f0c81c5' })"
+					"pm.request.headers.add({key: 'Authorization', value: 'Bearer 7jZqU9g6IFEbbCqTEQB8mtJRYQpc689zgmOwZ3gD1c400fe0' })"
 				]
 			}
 		},

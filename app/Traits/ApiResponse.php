@@ -17,7 +17,6 @@ trait ApiResponse {
 			$data = collect( $data )->merge( $additionalData );
 		}
 		$response = $this->customResponse( $data, $status, $message, $errors, $statusCode );
-		// dump( $data->resource, get_class_methods( $data->resource ) );
 		if ( $pagination ) {
 			$response['meta'] = [ 
 				'hasMorePages' => $data->resource->hasMorePages(),

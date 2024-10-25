@@ -65,6 +65,8 @@ class ProductController extends Controller {
 	 * Display the specified resource.
 	 */
 	public function show( int $id ) {
+
+
 		$product = QueryBuilder::for( Product::class)
 			->allowedIncludes( [ 'category', 'producer' ] )
 			->where( 'id', $id )
